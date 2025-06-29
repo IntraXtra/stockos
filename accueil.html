@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Menu -->
+        <div class="sidebar">
+            <div class="logo-section">
+                <!-- REMPLACEZ "votre-logo.png" par le chemin de votre logo -->
+                <div class="logo-corner">
+                    <img src="logo.png" alt="Logo" class="logo">
+                </div>
+            </div>
+            
+            <div class="menu-header">
+                <h2>Menu</h2>
+            </div>
+            
+            <div class="search-section">
+                <input type="text" placeholder="Recherche" class="search-input">
+                <button class="search-btn">🔍</button>
+            </div>
+            
+            <button class="add-btn" onclick="window.location.href='ajouter.html'">+ Ajouter</button>
+            
+            <div class="categories">
+                <div class="category-header" onclick="toggleCategories()">
+                    <span id="category-arrow">∨ Catégories</span>
+                    <span class="plus">+</span>
+                </div>
+                <ul class="category-list" id="category-list">
+                    <li onclick="window.location.href='coffrage.html'">Coffrage</li>
+                    <li onclick="window.location.href='electroportatif.html'">Electroportatif</li>
+                    <li onclick="window.location.href='armature.html'">Armature</li>
+                    <li onclick="window.location.href='epi.html'">EPI</li>
+                    <li onclick="window.location.href='revetement.html'">Revêtement</li>
+                </ul>
+            </div>
+            
+            <div class="bottom-menu">
+                <div class="menu-item">
+                    <a href="compte.html">
+                        <span class="icon">👤</span>
+                        <span>Compte</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="parametres.html">
+                        <span class="icon">⚙️</span>
+                        <span>Paramètre</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Recent Additions Section -->
+            <section class="recent-section section-bubble">
+                <h2 class="section-title">Derniers ajouts :</h2>
+                <div class="items-grid">
+                    <div class="item-card">
+                        <div class="item-image">
+                            <!-- REMPLACEZ "images/tubes-acier.jpg" par le chemin de votre image -->
+                            <img src="1-acier.jpg" alt="Tubes acier d20" class="product-image">
+                        </div>
+                        <div class="item-info">
+                            <div class="item-date">Il y a 3 jours</div>
+                            <div class="item-title">Tubes acier d20</div>
+                        </div>
+                    </div>
+                    
+                    <div class="item-card">
+                        <div class="item-image">
+                            <!-- REMPLACEZ "images/bastaing.jpg" par le chemin de votre image -->
+                            <img src="1-bastaing.jpg" alt="Bastaing 50x150" class="product-image">
+                        </div>
+                        <div class="item-info">
+                            <div class="item-date">Il y a 4 jours</div>
+                            <div class="item-title">Bastaing 50x150</div>
+                        </div>
+                    </div>
+                    
+                    <div class="item-card">
+                        <div class="item-image">
+                            <!-- REMPLACEZ "images/ragreage.jpg" par le chemin de votre image -->
+                            <img src="1-ragreage.jpg" alt="Ragréage mural" class="product-image">
+                        </div>
+                        <div class="item-info">
+                            <div class="item-date">Il y a 5 jours</div>
+                            <div class="item-title">Ragréage mural</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Community Chat Section -->
+            <section class="chat-section section-bubble">
+                <h2 class="section-title">Chat commun :</h2>
+                <div class="chat-container">
+                    <div class="chat-message">
+                        <div class="message-header">
+                            <span class="username">Tonio - Administrateur</span>
+                            <span class="timestamp">10h02</span>
+                        </div>
+                        <div class="message-content">
+                            Bonjour, où sont les contreplaqués de 150 svp?
+                        </div>
+                    </div>
+                    
+                    <div class="chat-message">
+                        <div class="message-header">
+                            <span class="username">Lillian</span>
+                            <span class="timestamp">10h05</span>
+                        </div>
+                        <div class="message-content">
+                            Ferme ta gueule toi et tes contreplaqués
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bouton pour écrire un message -->
+                <div class="chat-actions">
+                    <button class="write-message-btn" onclick="window.location.href='message.html'">
+                        ✏️ Écrire un message
+                    </button>
+                </div>
+            </section>
+            
+            <!-- Chat Support Button - CORRIGÉ avec onclick -->
+            <div class="chat-support">
+                <div class="chat-bubble" onclick="openChatPopup()">
+                    <div class="chat-icon">🤖</div>
+                    <div class="chat-text">Je suis à votre écoute</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fenêtre de chat popup -->
+    <div id="chat-popup" class="chat-popup">
+        <div class="chat-header">
+            <span>🤖 Assistant IA</span>
+            <button onclick="closeChatPopup()" class="close-btn">×</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="bot-message">
+                <div class="message-content">Bonjour ! Comment puis-je vous aider aujourd'hui ?</div>
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Tapez votre message..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()" class="send-btn">Envoyer</button>
+        </div>
+    </div>
+
+    <!-- Overlay pour fermer le chat -->
+    <div id="chat-overlay" class="chat-overlay" onclick="closeChatPopup()"></div>
+
+    <script>
+        // Fonction pour basculer l'affichage des catégories
+        function toggleCategories() {
+            const categoryList = document.getElementById('category-list');
+            const arrow = document.getElementById('category-arrow');
+            
+            if (categoryList.style.display === 'none') {
+                categoryList.style.display = 'block';
+                arrow.textContent = '∨ Catégories';
+            } else {
+                categoryList.style.display = 'none';
+                arrow.textContent = '> Catégories';
+            }
+        }
+
+        // NOUVELLES FONCTIONS pour le chatbot
+        function openChatPopup() {
+            document.getElementById('chat-popup').classList.add('active');
+            document.getElementById('chat-overlay').classList.add('active');
+            document.getElementById('chat-input').focus();
+        }
+
+        function closeChatPopup() {
+            document.getElementById('chat-popup').classList.remove('active');
+            document.getElementById('chat-overlay').classList.remove('active');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const messagesContainer = document.getElementById('chat-messages');
+            
+            // Ajouter le message de l'utilisateur
+            const userMessage = document.createElement('div');
+            userMessage.className = 'user-message';
+            userMessage.innerHTML = `<div class="message-content">${message}</div>`;
+            messagesContainer.appendChild(userMessage);
+            
+            input.value = '';
+            
+            // Ajouter un indicateur de frappe
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'bot-message typing-indicator';
+            typingIndicator.innerHTML = `
+                <div class="message-content">
+                    <div class="typing-animation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            `;
+            messagesContainer.appendChild(typingIndicator);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Simuler une réponse du bot après 1.5 secondes
+            setTimeout(() => {
+                messagesContainer.removeChild(typingIndicator);
+                
+                const responses = [
+                    "Je comprends votre question sur les matériaux de construction. Comment puis-je vous aider davantage ?",
+                    "Excellente question ! Nos experts peuvent vous conseiller sur ce type de produit.",
+                    "Merci pour votre message. Je vais vous aider à trouver les informations nécessaires.",
+                    "Pour ce type de demande, je vous recommande de consulter notre catalogue ou de contacter notre équipe.",
+                    "C'est une demande intéressante. Avez-vous des spécifications particulières en tête ?"
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                
+                const botMessage = document.createElement('div');
+                botMessage.className = 'bot-message';
+                botMessage.innerHTML = `<div class="message-content">${randomResponse}</div>`;
+                messagesContainer.appendChild(botMessage);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 1500);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>

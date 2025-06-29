@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffrage - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Menu - Identique à la page d'accueil -->
+        <div class="sidebar">
+            <div class="logo-section">
+                <div class="logo-corner">
+                    <img src="logo.png" alt="Logo" class="logo">
+                </div>
+            </div>
+            
+            <div class="menu-header">
+                <h2>Menu</h2>
+            </div>
+            
+            <div class="search-section">
+                <input type="text" placeholder="Recherche" class="search-input">
+                <button class="search-btn">🔍</button>
+            </div>
+            
+            <button class="add-btn" onclick="window.location.href='ajouter.html'">+ Ajouter</button>
+            
+            <div class="categories">
+                <div class="category-header" onclick="toggleCategories()">
+                    <span id="category-arrow">∨ Catégories</span>
+                    <span class="plus">+</span>
+                </div>
+                <ul class="category-list" id="category-list">
+                    <li onclick="window.location.href='coffrage.html'">Coffrage</li>
+                    <li onclick="window.location.href='electroportatif.html'" class="active">Electroportatif</li>
+                    <li onclick="window.location.href='armature.html'">Armature</li>
+                    <li onclick="window.location.href='epi.html'">EPI</li>
+                    <li onclick="window.location.href='revetement.html'">Revêtement</li>
+                </ul>
+            </div>
+            
+            <div class="bottom-menu">
+                <div class="menu-item">
+                    <span class="icon">👤</span>
+                    <span>Compte</span>
+                </div>
+                <div class="menu-item">
+                    <span class="icon">⚙️</span>
+                    <span>Paramètre</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header avec bouton retour et filtre -->
+            <div class="page-header">
+                <button class="return-btn" onclick="window.location.href='accueil.html'">
+                    ← RETOUR
+                </button>
+                <h1 class="page-title">Coffrage :</h1>
+                <div class="filter-icon">🔽</div>
+            </div>
+            
+            <!-- Grille des produits coffrage -->
+            <section class="products-section section-bubble">
+                <div class="products-grid">
+                    <!-- Produit 1 -->
+                    <div class="product-card" onclick="window.location.href='elec1.html'">
+                        <div class="product-image">
+                            <!-- REMPLACEZ par le chemin de votre image coffrage 1 -->
+                            <img src="elec/bosch.webp" alt="Marque BOSCH" class="product-image-item">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Marque BOSCH</h3>
+                        </div>
+                    </div>
+                    
+                    <!-- Produit 2 -->
+                    <div class="product-card" onclick="window.location.href='elec2.html'">
+                        <div class="product-image">
+                            <!-- REMPLACEZ par le chemin de votre image coffrage 2 -->
+                            <img src="elec/dewalt.avif" alt="Marque DeWalt" class="product-image-item">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Marque DeWalt</h3>
+                        </div>
+                    </div>
+                    
+                    <!-- Produit 3 -->
+                    <div class="product-card" onclick="window.location.href='elec3.html'">
+                        <div class="product-image">
+                            <!-- REMPLACEZ par le chemin de votre image coffrage 3 -->
+                            <img src="elec/makita.webp" alt="Marque Makita" class="product-image-item">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Marque Makita</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Chat Support Button -->
+            <div class="chat-support">
+                <div class="chat-bubble" onclick="openChatPopup()">
+                    <div class="chat-icon">🤖</div>
+                    <div class="chat-text">Je suis à votre écoute</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fenêtre de chat popup -->
+    <div id="chat-popup" class="chat-popup">
+        <div class="chat-header">
+            <span>🤖 Assistant IA</span>
+            <button onclick="closeChatPopup()" class="close-btn">×</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="bot-message">
+                <div class="message-content">Bonjour ! Comment puis-je vous aider avec le coffrage ?</div>
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Tapez votre message..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()" class="send-btn">Envoyer</button>
+        </div>
+    </div>
+
+    <!-- Overlay pour fermer le chat -->
+    <div id="chat-overlay" class="chat-overlay" onclick="closeChatPopup()"></div>
+
+    <script>
+        // Fonction pour basculer l'affichage des catégories
+        function toggleCategories() {
+            const categoryList = document.getElementById('category-list');
+            const arrow = document.getElementById('category-arrow');
+            
+            if (categoryList.style.display === 'none') {
+                categoryList.style.display = 'block';
+                arrow.textContent = '∨ Catégories';
+            } else {
+                categoryList.style.display = 'none';
+                arrow.textContent = '> Catégories';
+            }
+        }
+
+        // Fonctions pour le chatbot
+        function openChatPopup() {
+            document.getElementById('chat-popup').classList.add('active');
+            document.getElementById('chat-overlay').classList.add('active');
+            document.getElementById('chat-input').focus();
+        }
+
+        function closeChatPopup() {
+            document.getElementById('chat-popup').classList.remove('active');
+            document.getElementById('chat-overlay').classList.remove('active');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const messagesContainer = document.getElementById('chat-messages');
+            
+            // Ajouter le message de l'utilisateur
+            const userMessage = document.createElement('div');
+            userMessage.className = 'user-message';
+            userMessage.innerHTML = `<div class="message-content">${message}</div>`;
+            messagesContainer.appendChild(userMessage);
+            
+            input.value = '';
+            
+            // Simuler une réponse du bot
+            setTimeout(() => {
+                const responses = [
+                    "Pour le coffrage, nous avons plusieurs dimensions disponibles. Quelle taille recherchez-vous ?",
+                    "Nos produits de coffrage sont de haute qualité. Avez-vous des spécifications particulières ?",
+                    "Je peux vous aider à choisir le bon coffrage selon votre projet.",
+                    "Nos dimensions de coffrage sont optimisées pour tous types de chantiers."
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                
+                const botMessage = document.createElement('div');
+                botMessage.className = 'bot-message';
+                botMessage.innerHTML = `<div class="message-content">${randomResponse}</div>`;
+                messagesContainer.appendChild(botMessage);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 1000);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>

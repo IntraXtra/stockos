@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Compte</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            padding: 30px;
+        }
+
+        .account-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            color: #00bcd4;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, #e3f2fd, #f1f8e9);
+            border-radius: 15px;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00bcd4, #4caf50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .profile-info h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .profile-info p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #00bcd4;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #00bcd4;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #00bcd4;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00bcd4, #4caf50);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.3s;
+        }
+
+        .activity-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-desc {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .activity-date {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .preferences-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .preference-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #00bcd4;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            body {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="account-container">
+        <h1 class="page-title">Mon Compte</h1>
+        
+        <!-- Section Profil -->
+        <div class="profile-section">
+            <div class="profile-avatar">MH</div>
+            <div class="profile-info">
+                <h2>Mohamed HAMAM</h2>
+                <p><strong>Email :</strong> mohamed.hamam@email.com</p>
+                <p><strong>Membre depuis :</strong> Juin 2025</p>
+                <p><strong>Statut :</strong> Utilisateur actif</p>
+            </div>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">47</div>
+                <div class="stat-label">Articles ajoutés</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Emprunts en cours</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">156</div>
+                <div class="stat-label">Emprunts totaux</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4.8</div>
+                <div class="stat-label">Note moyenne</div>
+            </div>
+        </div>
+
+        <!-- Informations personnelles -->
+        <div class="section">
+            <h3 class="section-title">Informations personnelles</h3>
+            <form id="profileForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" id="prenom" name="prenom" value="Mohamed">
+                    </div>
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" name="nom" value="HAMAM">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="mohamed.hamam@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Téléphone</label>
+                        <input type="tel" id="telephone" name="telephone" value="06 12 34 56 78">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="entreprise">Entreprise</label>
+                    <input type="text" id="entreprise" name="entreprise" value="BTP Construction">
+                </div>
+                <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                <button type="button" class="btn btn-secondary">Annuler</button>
+            </form>
+        </div>
+
+        <!-- Activité récente -->
+        <div class="section">
+            <h3 class="section-title">Activité récente</h3>
+            <ul class="activity-list">
+                <li class="activity-item">
+                    <div>
+                        <div class="activity-desc">Ajout d'un article : Tubes acier d20</div>
+                        <div class="activity-date">Il y a 3 jours</div>
+                    </div>
+                </li>
+                <li class="activity-item">
+                    <div>
+                        <div class="activity-desc">Emprunt : Basting 50x150</div>
+                        <div class="activity-date">Il y a 4 jours</div>
+                    </div>
+                </li>
+                <li class="activity-item">
+                    <div>
+                        <div class="activity-desc">Retour : Ragréage mural</div>
+                        <div class="activity-date">Il y a 5 jours</div>
+                    </div>
+                </li>
+                <li class="activity-item">
+                    <div>
+                        <div class="activity-desc">Ajout d'un article : Perceuse BOSCH</div>
+                        <div class="activity-date">Il y a 1 semaine</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Préférences -->
+        <div class="section">
+            <h3 class="section-title">Préférences</h3>
+            <div class="preferences-grid">
+                <div class="preference-card">
+                    <h4>Notifications</h4>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0;">
+                        <span>Notifications par email</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0;">
+                        <span>Rappels d'échéance</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="preference-card">
+                    <h4>Confidentialité</h4>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0;">
+                        <span>Profil public</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0;">
+                        <span>Partage d'activité</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gestion du formulaire de profil
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Profil mis à jour avec succès !');
+        });
+
+        // Animation des cartes statistiques
+        const statCards = document.querySelectorAll('.stat-card');
+        statCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 8px 25px rgba(0,188,212,0.3)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Gestion des toggles
+        const toggles = document.querySelectorAll('.toggle-switch input');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                console.log('Préférence modifiée:', this.parentElement.parentElement.querySelector('span').textContent, this.checked);
+            });
+        });
+    </script>
+</body>
+</html>

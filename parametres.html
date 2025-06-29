@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramètres</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            padding: 30px;
+        }
+
+        .settings-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            color: #00bcd4;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .settings-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .setting-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            transition: border-color 0.3s;
+        }
+
+        .setting-card:hover {
+            border-color: #00bcd4;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            padding: 10px 0;
+        }
+
+        .setting-item:not(:last-child) {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .setting-label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .setting-description {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #00bcd4;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #00bcd4;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00bcd4, #4caf50);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .storage-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .storage-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #00bcd4, #4caf50);
+            width: 65%;
+            transition: width 0.3s;
+        }
+
+        .storage-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .version-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .version-info h4 {
+            color: #00bcd4;
+            margin-bottom: 10px;
+        }
+
+        .version-info p {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            body {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <h1 class="page-title">⚙️ Paramètres</h1>
+        
+        <!-- Notifications -->
+        <div class="settings-section">
+            <h3 class="section-title">
+                🔔 Notifications
+            </h3>
+            <div class="settings-grid">
+                <div class="setting-card">
+                    <h4>Notifications générales</h4>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Notifications push</div>
+                            <div class="setting-description">Recevoir des notifications sur votre appareil</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Notifications par email</div>
+                            <div class="setting-description">Recevoir des emails de notification</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Rappels d'échéance</div>
+                            <div class="setting-description">Être notifié des dates d'échéance</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setting-card">
+                    <h4>Chat et messages</h4>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Messages du chat</div>
+                            <div class="setting-description">Notifications des nouveaux messages</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Mentions</div>
+                            <div class="setting-description">Quand quelqu'un vous mentionne</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confidentialité -->
+        <div class="settings-section">
+            <h3 class="section-title">
+                🔒 Confidentialité et sécurité
+            </h3>
+            <div class="settings-grid">
+                <div class="setting-card">
+                    <h4>Visibilité du profil</h4>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Profil public</div>
+                            <div class="setting-description">Votre profil est visible par tous</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Partage d'activité</div>
+                            <div class="setting-description">Partager vos activités avec la communauté</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setting-card">
+                    <h4>Sécurité</h4>
+                    <div class="form-group">
+                        <label>Changer le mot de passe</label>
+                        <input type="password" placeholder="Nouveau mot de passe">
+                    </div>
+                    <button class="btn btn-primary">Mettre à jour</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Préférences d'affichage -->
+        <div class="settings-section">
+            <h3 class="section-title">
+                🎨 Affichage
+            </h3>
+            <div class="settings-grid">
+                <div class="setting-card">
+                    <h4>Interface</h4>
+                    <div class="form-group">
+                        <label for="theme">Thème</label>
+                        <select id="theme" name="theme">
+                            <option value="clair">Clair</option>
+                            <option value="sombre">Sombre</option>
+                            <option value="auto">Automatique</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="langue">Langue</label>
+                        <select id="langue" name="langue">
+                            <option value="fr">Français</option>
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="setting-card">
+                    <h4>Affichage des articles</h4>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Vue grille</div>
+                            <div class="setting-description">Afficher les articles en grille</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="articles-par-page">Articles par page</label>
+                        <select id="articles-par-page" name="articles-par-page">
+                            <option value="12">12</option>
+                            <option value="24" selected>24</option>
+                            <option value="48">48</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stockage -->
+        <div class="settings-section">
+            <h3 class="section-title">
+                💾 Stockage et données
+            </h3>
+            <div class="setting-card">
+                <h4>Utilisation du stockage</h4>
+                <div class="storage-bar">
+                    <div class="storage-fill"></div>
+                </div>
+                <div class="storage-info">
+                    <span>6.5 GB utilisés</span>
+                    <span>10 GB disponibles</span>
+                </div>
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-secondary">Vider le cache</button>
+                    <button class="btn btn-secondary">Exporter les données</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- À propos -->
+        <div class="settings-section">
+            <h3 class="section-title">
+                ℹ️ À propos
+            </h3>
+            <div class="setting-card">
+                <div class="version-info">
+                    <h4>Informations de l'application</h4>
+                    <p><strong>Version :</strong> 2.1.4</p>
+                    <p><strong>Dernière mise à jour :</strong> 25 juin 2025</p>
+                    <p><strong>Développeur :</strong> Équipe BTP Tools</p>
+                </div>
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-secondary">Vérifier les mises à jour</button>
+                    <button class="btn btn-secondary">Conditions d'utilisation</button>
+                    <button class="btn btn-secondary">Politique de confidentialité</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions dangereuses -->
+        <div class="settings-section">
+            <h3 class="section-title">
+                ⚠️ Zone dangereuse
+            </h3>
+            <div class="setting-card">
+                <h4>Actions irréversibles</h4>
+                <p style="color: #666; margin-bottom: 20px;">
+                    Ces actions sont définitives et ne peuvent pas être annulées.
+                </p>
+                <button class="btn btn-danger">Supprimer toutes les données</button>
+                <button class="btn btn-danger">Supprimer le compte</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gestion des toggles
+        const toggles = document.querySelectorAll('.toggle-switch input');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const label = this.closest('.setting-item').querySelector('.setting-label').textContent;
+                console.log(`${label}: ${this.checked ? 'Activé' : 'Désactivé'}`);
+            });
+        });
+
+        // Gestion du changement de thème
+        document.getElementById('theme').addEventListener('change', function() {
+            console.log('Thème changé:', this.value);
+            // Ici vous pouvez implémenter le changement de thème
+        });
+
+        // Gestion des boutons dangereux
+        document.querySelectorAll('.btn-danger').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const action = this.textContent;
+                if (confirm(`Êtes-vous sûr de vouloir ${action.toLowerCase()} ? Cette action est irréversible.`)) {
+                    alert(`Action "${action}" confirmée`);
+                }
+            });
+        });
+
+        // Animation de la barre de stockage
+        window.addEventListener('load', function() {
+            const storageFill = document.querySelector('.storage-fill');
+            storageFill.style.width = '0%';
+            setTimeout(() => {
+                storageFill.style.width = '65%';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
