@@ -1,263 +1,1083 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
-    
-    <div class="container">
-        <!-- Sidebar Menu -->
-        <div class="sidebar">
-            <div class="logo-section">
-                <!-- REMPLACEZ "votre-logo.png" par le chemin de votre logo -->
-                <div class="logo-corner">
-                    <img src="logo.png" alt="Logo" class="logo">
-                </div>
-            </div>
-            
-            <div class="menu-header">
-                <h2>Menu</h2>
-            </div>
-            
-            <div class="search-section">
-                <input type="text" placeholder="Recherche" class="search-input">
-                <button class="search-btn">🔍</button>
-            </div>
-            
-            <button class="add-btn" onclick="window.location.href='ajouter.html'">+ Ajouter</button>
-            
-            <div class="categories">
-                <div class="category-header" onclick="toggleCategories()">
-                    <span id="category-arrow">∨ Catégories</span>
-                    <span class="plus">+</span>
-                </div>
-                <ul class="category-list" id="category-list">
-                    <li onclick="window.location.href='coffrage.html'">Coffrage</li>
-                    <li onclick="window.location.href='electroportatif.html'">Electroportatif</li>
-                    <li onclick="window.location.href='armature.html'">Armature</li>
-                    <li onclick="window.location.href='epi.html'">EPI</li>
-                    <li onclick="window.location.href='revetement.html'">Revêtement</li>
-                </ul>
-            </div>
-            
-            <div class="bottom-menu">
-                <div class="menu-item">
-                    <a href="compte.html">
-                        <span class="icon">👤</span>
-                        <span>Compte</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a href="parametres.html">
-                        <span class="icon">⚙️</span>
-                        <span>Paramètre</span>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-        
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Recent Additions Section -->
-            <section class="recent-section section-bubble">
-                <h2 class="section-title">Derniers ajouts :</h2>
-                <div class="items-grid">
-                    <div class="item-card">
-                        <div class="item-image">
-                            <!-- REMPLACEZ "images/tubes-acier.jpg" par le chemin de votre image -->
-                            <img src="1-acier.jpg" alt="Tubes acier d20" class="product-image">
-                        </div>
-                        <div class="item-info">
-                            <div class="item-date">Il y a 3 jours</div>
-                            <div class="item-title">Tubes acier d20</div>
-                        </div>
-                    </div>
-                    
-                    <div class="item-card">
-                        <div class="item-image">
-                            <!-- REMPLACEZ "images/bastaing.jpg" par le chemin de votre image -->
-                            <img src="1-bastaing.jpg" alt="Bastaing 50x150" class="product-image">
-                        </div>
-                        <div class="item-info">
-                            <div class="item-date">Il y a 4 jours</div>
-                            <div class="item-title">Bastaing 50x150</div>
-                        </div>
-                    </div>
-                    
-                    <div class="item-card">
-                        <div class="item-image">
-                            <!-- REMPLACEZ "images/ragreage.jpg" par le chemin de votre image -->
-                            <img src="1-ragreage.jpg" alt="Ragréage mural" class="product-image">
-                        </div>
-                        <div class="item-info">
-                            <div class="item-date">Il y a 5 jours</div>
-                            <div class="item-title">Ragréage mural</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Community Chat Section -->
-            <section class="chat-section section-bubble">
-                <h2 class="section-title">Chat commun :</h2>
-                <div class="chat-container">
-                    <div class="chat-message">
-                        <div class="message-header">
-                            <span class="username">Tonio - Administrateur</span>
-                            <span class="timestamp">10h02</span>
-                        </div>
-                        <div class="message-content">
-                            Bonjour, où sont les contreplaqués de 150 svp?
-                        </div>
-                    </div>
-                    
-                    <div class="chat-message">
-                        <div class="message-header">
-                            <span class="username">Rachid - administrateur</span>
-                            <span class="timestamp">10h05</span>
-                        </div>
-                        <div class="message-content">
-                            Ils sont dans la section coffrage, juste à côté des poutres.
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Bouton pour écrire un message -->
-                <div class="chat-actions">
-                    <button class="write-message-btn" onclick="window.location.href='message.html'">
-                        ✏️ Écrire un message
-                    </button>
-                </div>
-            </section>
-            
-            <!-- Chat Support Button - CORRIGÉ avec onclick -->
-            <div class="chat-support">
-                <div class="chat-bubble" onclick="openChatPopup()">
-                    <div class="chat-icon">🤖</div>
-                    <div class="chat-text">Je suis à votre écoute</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Fenêtre de chat popup -->
-    <div id="chat-popup" class="chat-popup">
-        <div class="chat-header">
-            <span>🤖 Assistant IA</span>
-            <button onclick="closeChatPopup()" class="close-btn">×</button>
-        </div>
-        <div class="chat-messages" id="chat-messages">
-            <div class="bot-message">
-                <div class="message-content">Bonjour ! Comment puis-je vous aider aujourd'hui ?</div>
-            </div>
-        </div>
-        <div class="chat-input-container">
-            <input type="text" id="chat-input" placeholder="Tapez votre message..." onkeypress="handleKeyPress(event)">
-            <button onclick="sendMessage()" class="send-btn">Envoyer</button>
-        </div>
-    </div>
-
-    <!-- Overlay pour fermer le chat -->
-    <div id="chat-overlay" class="chat-overlay" onclick="closeChatPopup()"></div>
-
-    <script>
-        // Fonction pour basculer l'affichage des catégories
-        function toggleCategories() {
-            const categoryList = document.getElementById('category-list');
-            const arrow = document.getElementById('category-arrow');
-            
-            if (categoryList.style.display === 'none') {
-                categoryList.style.display = 'block';
-                arrow.textContent = '∨ Catégories';
-            } else {
-                categoryList.style.display = 'none';
-                arrow.textContent = '> Catégories';
-            }
-        }
-
-        // NOUVELLES FONCTIONS pour le chatbot
-        function openChatPopup() {
-            document.getElementById('chat-popup').classList.add('active');
-            document.getElementById('chat-overlay').classList.add('active');
-            document.getElementById('chat-input').focus();
-        }
-
-        function closeChatPopup() {
-            document.getElementById('chat-popup').classList.remove('active');
-            document.getElementById('chat-overlay').classList.remove('active');
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chat-input');
-            const message = input.value.trim();
-            
-            if (!message) return;
-            
-            const messagesContainer = document.getElementById('chat-messages');
-            
-            // Ajouter le message de l'utilisateur
-            const userMessage = document.createElement('div');
-            userMessage.className = 'user-message';
-            userMessage.innerHTML = `<div class="message-content">${message}</div>`;
-            messagesContainer.appendChild(userMessage);
-            
-            input.value = '';
-            
-            // Ajouter un indicateur de frappe
-            const typingIndicator = document.createElement('div');
-            typingIndicator.className = 'bot-message typing-indicator';
-            typingIndicator.innerHTML = `
-                <div class="message-content">
-                    <div class="typing-animation">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-            `;
-            messagesContainer.appendChild(typingIndicator);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            
-            // Simuler une réponse du bot après 1.5 secondes
-            setTimeout(() => {
-                messagesContainer.removeChild(typingIndicator);
-                
-                const responses = [
-                    "Je comprends votre question sur les matériaux de construction. Comment puis-je vous aider davantage ?",
-                    "Excellente question ! Nos experts peuvent vous conseiller sur ce type de produit.",
-                    "Merci pour votre message. Je vais vous aider à trouver les informations nécessaires.",
-                    "Pour ce type de demande, je vous recommande de consulter notre catalogue ou de contacter notre équipe.",
-                    "C'est une demande intéressante. Avez-vous des spécifications particulières en tête ?"
-                ];
-                
-                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                
-                const botMessage = document.createElement('div');
-                botMessage.className = 'bot-message';
-                botMessage.innerHTML = `<div class="message-content">${randomResponse}</div>`;
-                messagesContainer.appendChild(botMessage);
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }, 1500);
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                sendMessage();
-            }
-        }
-    </script>
-    <script>
-function toggleSidebar() {
-  document.querySelector('.sidebar').classList.toggle('open');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-</script>
 
-</body>
-</html>
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    font-weight: 400;
+    line-height: 1.6;
+    color: #1e293b;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Logo Section - Plus petit dans le coin */
+.logo-section {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 10;
+}
+
+.logo-corner {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logo {
+    max-height: 28px;
+    max-width: 28px;
+    object-fit: contain;
+}
+
+/* Sidebar Styles - Prolongé jusqu'en bas */
+.sidebar {
+    width: 280px;
+    background: linear-gradient(135deg, #0ea5e9, #06b6d4, #10b981);
+    color: white;
+    padding: 70px 25px 25px 25px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 20px rgba(14, 165, 233, 0.15);
+    position: relative;
+    min-height: 100vh;
+    flex-shrink: 0;
+}
+
+.menu-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.menu-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.search-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.search-input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    /* Remplacement backdrop-filter pour compatibilité */
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #10b981;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 8px;
+    padding: 14px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+}
+
+.add-btn {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+    color: white;
+    border: none;
+    padding: 16px 28px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(74, 222, 128, 0.3);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 222, 128, 0.4);
+}
+
+.categories {
+    flex: 1;
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    cursor: pointer;
+    padding: 8px 0;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.category-header:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.category-list {
+    list-style: none;
+    padding-left: 0;
+    transition: all 0.3s ease;
+}
+
+.category-list li {
+    padding: 12px 18px;
+    font-size: 15px;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.category-list li:hover {
+    border-left-color: #10b981;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+}
+
+.category-list li:hover::after {
+    content: "→";
+    position: absolute;
+    right: 15px;
+    color: #10b981;
+    font-weight: bold;
+}
+
+.bottom-menu {
+    margin-top: auto;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(2px);
+}
+
+.menu-item .icon {
+    margin-right: 14px;
+    font-size: 18px;
+}
+
+.menu-item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+}
+
+.menu-item a:hover {
+    color: #00bcd4;
+}
+
+.menu-item a:visited {
+    color: inherit;
+}
+
+/* Main Content Styles - Fond uniforme */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+    position: relative;
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    min-height: 100vh;
+}
+
+.section-bubble {
+    background: rgba(255, 255, 255, 0.8);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.section-title {
+    background: linear-gradient(135deg, #0ea5e9, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #0ea5e9; /* Fallback pour navigateurs non compatibles */
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 22px;
+    letter-spacing: -0.02em;
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+}
+
+.item-card {
+    background: rgba(255, 255, 255, 0.9);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 4px 16px rgba(14, 165, 233, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+}
+
+.item-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.15);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.item-image {
+    margin-bottom: 16px;
+}
+
+.item-date {
+    font-size: 13px;
+    color: #0891b2;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.item-title {
+    font-size: 19px;
+    font-weight: 600;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+}
+
+/* Chat Section */
+.chat-container {
+    background: rgba(255, 255, 255, 0.9);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(14, 165, 233, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.chat-message {
+    border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+}
+
+.chat-message:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.username {
+    font-weight: 600;
+    color: #0f172a;
+    font-size: 15px;
+}
+
+.timestamp {
+    color: #0891b2;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.message-content {
+    color: #334155;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* Chat Support Button */
+.chat-support {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}
+
+.chat-bubble {
+    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+    color: white;
+    padding: 18px 26px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 6px 25px rgba(14, 165, 233, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.chat-bubble:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(14, 165, 233, 0.4);
+}
+
+.chat-text {
+    margin-left: 12px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.chat-icon {
+    font-size: 20px;
+}
+
+/* Styles pour les images de produits */
+.product-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid rgba(8, 145, 178, 0.1);
+    transition: all 0.3s ease;
+}
+
+.product-image:hover {
+    transform: scale(1.02);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* Styles pour les actions du chat */
+.chat-actions {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(14, 165, 233, 0.1);
+    text-align: center;
+}
+
+.write-message-btn {
+    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 12px rgba(14, 165, 233, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.write-message-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 16px rgba(14, 165, 233, 0.3);
+    background: linear-gradient(135deg, #0284c7, #0891b2);
+}
+
+/* Styles pour la fenêtre de chat popup */
+.chat-popup {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    z-index: 1001;
+    border: 1px solid #e2e8f0;
+}
+
+.chat-popup.active {
+    display: flex;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.chat-header {
+    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.bot-message, .user-message {
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.bot-message {
+    align-self: flex-start;
+}
+
+.user-message {
+    align-self: flex-end;
+}
+
+.bot-message .message-content {
+    background: #f1f5f9;
+    color: #334155;
+    padding: 12px 16px;
+    border-radius: 16px 16px 16px 4px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.user-message .message-content {
+    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 16px 16px 4px 16px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.chat-input-container {
+    padding: 15px 20px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    gap: 10px;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#chat-input:focus {
+    border-color: #0ea5e9;
+}
+
+.send-btn {
+    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.send-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+}
+
+.chat-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+}
+
+.chat-overlay.active {
+    display: block;
+}
+
+/* Animation de frappe */
+.typing-indicator .message-content {
+    padding: 12px 16px;
+}
+
+.typing-animation {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.typing-animation span {
+    width: 6px;
+    height: 6px;
+    background: #64748b;
+    border-radius: 50%;
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-animation span:nth-child(1) { animation-delay: 0s; }
+.typing-animation span:nth-child(2) { animation-delay: 0.2s; }
+.typing-animation span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-10px); }
+}
+
+/* Styles pour l'en-tête de page */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+.return-btn {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 12px rgba(74, 222, 128, 0.3);
+}
+
+.return-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 16px rgba(74, 222, 128, 0.4);
+}
+
+.page-title {
+    background: linear-gradient(135deg, #0ea5e9, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #0ea5e9; /* Fallback */
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.filter-icon {
+    font-size: 24px;
+    color: #4ade80;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.filter-icon:hover {
+    background: rgba(74, 222, 128, 0.1);
+}
+
+/* Styles pour la grille des produits */
+.products-section {
+    margin-top: 0;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+.product-card {
+    background: rgba(255, 255, 255, 0.9);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(14, 165, 233, 0.2);
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #0ea5e9, #10b981);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-card:hover::before {
+    opacity: 1;
+}
+
+.product-image {
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.product-image-item {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 16px;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image-item {
+    transform: scale(1.05);
+}
+
+.product-info {
+    text-align: center;
+}
+
+.product-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+/* Style pour la catégorie active */
+.category-list li.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-left-color: #10b981;
+    font-weight: 600;
+}
+
+/* Styles pour la page de détail produit */
+.product-detail-section {
+    margin-top: 0;
+}
+
+.product-detail-title {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #4ade80; /* Fallback */
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    letter-spacing: -0.02em;
+    text-align: center;
+}
+
+.product-detail-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.product-detail-image {
+    position: relative;
+}
+
+.detail-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 3px solid #4ade80;
+    box-shadow: 0 8px 25px rgba(74, 222, 128, 0.2);
+}
+
+.product-detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.info-section {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #4ade80;
+}
+
+.info-title {
+    color: #4ade80;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.quantity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quantity-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(74, 222, 128, 0.1);
+}
+
+.quantity-list li:last-child {
+    border-bottom: none;
+}
+
+.quantity-text {
+    color: #334155;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.photo-link {
+    color: #0ea5e9;
+    text-decoration: underline;
+    font-size: 14px;
+    font-style: italic;
+    transition: color 0.2s ease;
+}
+
+.photo-link:hover {
+    color: #0284c7;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.history-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+}
+
+.history-date {
+    color: #4ade80;
+    font-weight: 600;
+    font-size: 14px;
+    min-width: 50px;
+}
+
+.history-text {
+    color: #334155;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* BOUTON HAMBURGER POUR MOBILE */
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 2001;
+    background: #0ea5e9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 22px;
+    box-shadow: 0 2px 8px rgba(14,165,233,0.2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+    background: #0284c7;
+    transform: scale(1.05);
+}
+
+/* ================== RESPONSIVE DESIGN ================== */
+
+/* Tablettes */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        padding: 20px 15px;
+        position: relative;
+        box-shadow: 0 2px 10px rgba(14, 165, 233, 0.15);
+    }
+    .main-content {
+        padding: 20px 15px;
+    }
+    .logo-section {
+        position: static;
+        margin-bottom: 0;
+        margin-right: 16px;
+    }
+}
+
+/* Smartphones */
+@media (max-width: 768px) {
+    .sidebar-toggle { 
+        display: block; 
+    }
+    
+    .sidebar {
+        position: fixed;
+        left: -100vw;
+        top: 0;
+        width: 85vw;
+        max-width: 320px;
+        height: 100vh;
+        transition: left 0.3s ease;
+        z-index: 2000;
+        box-shadow: 4px 0 20px rgba(14, 165, 233, 0.25);
+        padding: 70px 20px 20px 20px;
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    
+    .sidebar.open {
+        left: 0;
+    }
+    
+    .main-content {
+        padding: 60px 15px 15px 15px;
+        margin-left: 0 !important;
+    }
+    
+    .items-grid,
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .section-bubble {
+        padding: 16px 12px;
+        margin-bottom: 16px;
+    }
+    
+    .section-title {
+        font-size: 22px;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .page-title {
+        font-size: 24px;
+    }
+    
+    .product-detail-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .detail-image {
+        height: 220px;
+    }
+    
+    .product-detail-title {
+        font-size: 22px;
+    }
+    
+    .quantity-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+/* Très petits écrans */
+@media (max-width: 480px) {
+    .chat-support {
+        right: 15px;
+        bottom: 15px;
+    }
+    
+    .chat-bubble {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .chat-popup {
+        width: 95vw;
+        max-width: 360px;
+        left: 2.5vw;
+        right: auto;
+        height: 75vh;
+        min-height: 400px;
+    }
+    
+    .sidebar {
+        width: 90vw;
+        max-width: 280px;
+    }
+    
+    .main-content {
+        padding: 60px 10px 10px 10px;
+    }
+    
+    .section-bubble {
+        padding: 12px 8px;
+    }
+    
+    .item-card,
+    .product-card {
+        padding: 16px;
+    }
+}
+
+/* Overlay pour fermer la sidebar mobile */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Support pour les anciens navigateurs */
+.sidebar,
+.section-bubble,
+.item-card,
+.chat-container,
+.chat-bubble,
+.product-card {
+    /* Fallback pour backdrop-filter */
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+/* Masquer les placeholders d'image */
+.image-placeholder {
+    display: none;
+}
