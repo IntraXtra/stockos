@@ -44,12 +44,16 @@
             
             <div class="bottom-menu">
                 <div class="menu-item">
-                    <span class="icon">👤</span>
-                    <span>Compte</span>
+                    <a href="compte.html">
+                        <span class="icon">👤</span>
+                        <span>Compte</span>
+                    </a>
                 </div>
                 <div class="menu-item">
-                    <span class="icon">⚙️</span>
-                    <span>Paramètre</span>
+                    <a href="parametres.html">
+                        <span class="icon">⚙️</span>
+                        <span>Paramètre</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -82,12 +86,12 @@
                             <h3 class="info-title">Quantité disponible:</h3>
                             <ul class="quantity-list">
                                 <li>
-                                    <span class="quantity-text">17 bastaings de 6ml au stock de Gretz</span>
-                                    <a href="#" class="photo-link">Lien photos</a>
+                                    <span class="quantity-text">2 armatures d'acier au stock de Tournan</span>
+                                    
                                 </li>
                                 <li>
-                                    <span class="quantity-text">7 bastaings de 3ml au stock de Gretz</span>
-                                    <a href="#" class="photo-link">Lien photos</a>
+                                    <span class="quantity-text">7 armatures d'acier au stock de Tournan</span>
+                                    
                                 </li>
                             </ul>
                         </div>
@@ -98,15 +102,15 @@
                             <div class="history-list">
                                 <div class="history-item">
                                     <span class="history-date">03/02:</span>
-                                    <span class="history-text">Raul a ajouter 32 bastaings de 6ml depuis le chantier 1679</span>
+                                    <span class="history-text">Alec a ajouter 3 armature depuis le chantier 1612</span>
                                 </div>
                                 <div class="history-item">
                                     <span class="history-date">12/02:</span>
-                                    <span class="history-text">José a retirer 15 bastaings pour le chantier 1890</span>
+                                    <span class="history-text">Rachid a retirer 5 armature pour le chantier 1812</span>
                                 </div>
                                 <div class="history-item">
                                     <span class="history-date">04/03:</span>
-                                    <span class="history-text">Edouard a ajouter 7 bastaings provenant du chantier 1232</span>
+                                    <span class="history-text">Emilie a ajouter 7 armature provenant du chantier 1242</span>
                                 </div>
                             </div>
                         </div>
@@ -187,10 +191,10 @@
             
             setTimeout(() => {
                 const responses = [
-                    "Ce bastaing est très demandé. Voulez-vous que je vérifie la disponibilité ?",
-                    "Les bastaings de 6ml sont parfaits pour les chantiers de grande envergure.",
-                    "Je peux vous aider à calculer la quantité nécessaire pour votre projet.",
-                    "Nos stocks sont régulièrement mis à jour. Cette information est-elle utile ?"
+                    "Pour l'armature, nous avons plusieurs dimensions disponibles. Quelle taille recherchez-vous ?",
+                    "Nos produits d'armature sont de haute qualité. Avez-vous des spécifications particulières ?",
+                    "Je peux vous aider à choisir le bon armature selon votre projet.",
+                    "Nos dimensions d'armature sont optimisées pour tous types de chantiers."
                 ];
                 
                 const randomResponse = responses[Math.floor(Math.random() * responses.length)];

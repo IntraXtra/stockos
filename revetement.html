@@ -44,12 +44,16 @@
             
             <div class="bottom-menu">
                 <div class="menu-item">
-                    <span class="icon">👤</span>
-                    <span>Compte</span>
+                    <a href="compte.html">
+                        <span class="icon">👤</span>
+                        <span>Compte</span>
+                    </a>
                 </div>
                 <div class="menu-item">
-                    <span class="icon">⚙️</span>
-                    <span>Paramètre</span>
+                    <a href="parametres.html">
+                        <span class="icon">⚙️</span>
+                        <span>Paramètre</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -61,11 +65,11 @@
                 <button class="return-btn" onclick="window.location.href='accueil.html'">
                     ← RETOUR
                 </button>
-                <h1 class="page-title">Coffrage :</h1>
+                <h1 class="page-title">Revêtement :</h1>
                 <div class="filter-icon">🔽</div>
             </div>
             
-            <!-- Grille des produits coffrage -->
+            <!-- Grille des produits revêtement -->
             <section class="products-section section-bubble">
                 <div class="products-grid">
                     <!-- Produit 1 -->
@@ -179,10 +183,10 @@
             // Simuler une réponse du bot
             setTimeout(() => {
                 const responses = [
-                    "Pour le coffrage, nous avons plusieurs dimensions disponibles. Quelle taille recherchez-vous ?",
-                    "Nos produits de coffrage sont de haute qualité. Avez-vous des spécifications particulières ?",
-                    "Je peux vous aider à choisir le bon coffrage selon votre projet.",
-                    "Nos dimensions de coffrage sont optimisées pour tous types de chantiers."
+                    "Pour le revêtement, nous avons plusieurs dimensions disponibles. Quelle taille recherchez-vous ?",
+                    "Nos produits de revêtement sont de haute qualité. Avez-vous des spécifications particulières ?",
+                    "Je peux vous aider à choisir le bon revêtement selon votre projet.",
+                    "Nos dimensions de revêtement sont optimisées pour tous types de chantiers."
                 ];
                 
                 const randomResponse = responses[Math.floor(Math.random() * responses.length)];

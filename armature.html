@@ -44,12 +44,16 @@
             
             <div class="bottom-menu">
                 <div class="menu-item">
-                    <span class="icon">👤</span>
-                    <span>Compte</span>
+                    <a href="compte.html">
+                        <span class="icon">👤</span>
+                        <span>Compte</span>
+                    </a>
                 </div>
                 <div class="menu-item">
-                    <span class="icon">⚙️</span>
-                    <span>Paramètre</span>
+                    <a href="parametres.html">
+                        <span class="icon">⚙️</span>
+                        <span>Paramètre</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -179,10 +183,10 @@
             // Simuler une réponse du bot
             setTimeout(() => {
                 const responses = [
-                    "Pour le coffrage, nous avons plusieurs dimensions disponibles. Quelle taille recherchez-vous ?",
-                    "Nos produits de coffrage sont de haute qualité. Avez-vous des spécifications particulières ?",
-                    "Je peux vous aider à choisir le bon coffrage selon votre projet.",
-                    "Nos dimensions de coffrage sont optimisées pour tous types de chantiers."
+                    "Pour l'armature, nous avons plusieurs dimensions disponibles. Quelle taille recherchez-vous ?",
+                    "Nos produits d'armature sont de haute qualité. Avez-vous des spécifications particulières ?",
+                    "Je peux vous aider à choisir le bon armature selon votre projet.",
+                    "Nos dimensions d'armature sont optimisées pour tous types de chantiers."
                 ];
                 
                 const randomResponse = responses[Math.floor(Math.random() * responses.length)];
