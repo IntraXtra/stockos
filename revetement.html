@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
     <div class="container">
         <!-- Sidebar Menu - Identique à la page d'accueil -->
         <div class="sidebar">
@@ -206,5 +207,27 @@
             }
         }
     </script>
+    <script>
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    
+    sidebar.classList.toggle('open');
+    
+    if (!overlay) {
+        const newOverlay = document.createElement('div');
+        newOverlay.className = 'sidebar-overlay';
+        newOverlay.onclick = closeSidebar;
+        document.body.appendChild(newOverlay);
+    }
+    
+    document.querySelector('.sidebar-overlay').classList.toggle('active');
+}
+
+function closeSidebar() {
+    document.querySelector('.sidebar').classList.remove('open');
+    document.querySelector('.sidebar-overlay').classList.remove('active');
+}
+</script>
 </body>
 </html>
