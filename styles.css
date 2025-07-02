@@ -387,30 +387,28 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
     .sidebar {
-        width: 100%;
+        width: 100vw;
         height: auto;
-        position: fixed;
+        position: relative;
+        left: 0;
         top: 0;
-        left: -100%;
-        transition: left 0.3s ease;
-        z-index: 1000;
-        min-height: 100vh;
+        min-height: unset;
+        box-shadow: none;
+        padding: 20px 8px 8px 8px;
     }
-    
     .main-content {
         margin-left: 0;
-        padding: 20px;
+        padding: 16px 2vw;
         min-height: 100vh;
     }
-    
     .items-grid {
         grid-template-columns: 1fr;
     }
-    
     .section-bubble {
-        padding: 20px;
+        padding: 12px 6px;
     }
 }
+
 
 /* Styles pour les images de produits */
 .product-image {
